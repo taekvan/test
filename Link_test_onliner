@@ -1,0 +1,41 @@
+from selenium import webdriver
+import requests
+import re
+
+class ProgHubParer(object):
+	def __init__(self,driver, lang):
+		self.driver = driver
+		self.lang = lang
+
+	def parse(self):
+		self.go_to_tests_page()
+
+
+	def go_to_tests_page(self):		
+		self.driver.get("https://onliner.by")
+		slide_elem = self.driver.find_elements_by_class_name("b-tile-main")
+		
+		
+		for elem in slide_elem:
+			x = elem.get_attribute("href")
+			if (x != None):
+				y = -1
+				if (x.find("http")>y):
+				
+			
+					print(x.find("http"))
+					print (elem.get_attribute("href"))
+					b = requests.get(x)
+					print(b.status_code)
+
+
+
+def main():
+	driver = webdriver.Chrome()
+	parser =	ProgHubParer(driver, "python")
+	parser.parse()
+
+	
+
+if __name__ == '__main__':
+	main()
